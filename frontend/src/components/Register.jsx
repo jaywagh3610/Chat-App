@@ -22,17 +22,14 @@ function Register() {
         onSubmit={handleRegistration}
         className="bg-white/10 backdrop-blur-lg rounded-xl shadow-xl p-8 w-[90%] max-w-sm text-white"
       >
-        {/* Icon */}
         <div className="flex justify-center mb-6">
           <FaUserPlus className="text-[70px] text-green-400 drop-shadow-lg" />
         </div>
 
-        {/* Title */}
         <h1 className="text-2xl font-bold text-center text-green-300 underline mb-6">
           Register
         </h1>
 
-        {/* Name Input */}
         <label className="block mb-1 text-sm font-semibold">Name</label>
         <input
           type="text"
@@ -42,7 +39,6 @@ function Register() {
           className="w-full px-4 py-2 mb-4 rounded-lg bg-white/20 placeholder:text-white text-white outline-none focus:ring-2 ring-green-400 transition"
         />
 
-        {/* Mobile Input */}
         <label className="block mb-1 text-sm font-semibold">
           Mobile Number
         </label>
@@ -54,7 +50,6 @@ function Register() {
           className="w-full px-4 py-2 mb-6 rounded-lg bg-white/20 placeholder:text-white text-white outline-none focus:ring-2 ring-green-400 transition"
         />
 
-        {/* Button */}
         <div className="flex justify-center">
           <button
             type="submit"

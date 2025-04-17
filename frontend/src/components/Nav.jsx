@@ -17,12 +17,10 @@ const Nav = memo(() => {
   }
   return (
     <div className="flex items-center justify-between px-4 py-3 border-b border-white/20 bg-gradient-to-r from-[#101c2e] to-[#162d4c] text-white shadow-md">
-      {/* Left Section - App Title */}
       <div className="flex items-center gap-2">
         <h1 className="text-xl font-semibold tracking-wide">ChatApp</h1>
       </div>
 
-      {/* Right Section - Search */}
       <form
         onSubmit={handleSearch}
         className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1 rounded-full transition focus-within:ring-2 ring-[#00e0ff]"

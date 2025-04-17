@@ -30,16 +30,10 @@ const Messages = memo(() => {
     // console.log(socket);
     if (!socket || !messages.length) return;
 
-    const undeliveredMessages = messages.filter(
-      (msg) => msg.senderId === chatting?.data?._id && msg.status === "sent"
-    );
-
-    if (undeliveredMessages.length > 0) {
-      socket.emit("message-delivered", {
-        userId: user?.data?._id,
-        receiverId: chatting?.data?._id,
-      });
-    }
+    socket.emit("message-delivered", {
+      userId: user?.data?._id,
+      receiverId: chatting?.data?._id,
+    });
   }, [chatting?.data?._id, user?.data?._id, socket, messages]);
   useEffect(() => {
     if (!socket) return;

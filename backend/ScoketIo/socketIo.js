@@ -70,7 +70,7 @@ io.on("connection", (socket) => {
     const messageIds = participants
       ?.flatMap((p) => p.sentMessageId)
       .filter((id) => id);
-
+    console.log(messageIds);
     const objectIds = messageIds
       .map((id) => {
         try {
@@ -86,10 +86,15 @@ io.on("connection", (socket) => {
       const bulkOps = objectIds.map((messageId) => ({
         updateOne: {
           filter: {
-            // participants: { $all: [userId, receiverId] },
-            "messages._id": messageId,
+            participants: { $all: [userId, receiverId] },
           },
-          update: { $set: { "messages.$.status": "delivered" } },
+          update: { $set: { "messages.$[elem].status": "delivered" } },
+          arrayFilters: [
+            {
+              "elem._id": messageId,
+              "elem.status": { $ne: "delivered" },
+            },
+          ],
         },
       }));
       if (receiverSocketId) {
@@ -116,6 +121,7 @@ io.on("connection", (socket) => {
         const messageIds = participants
           ?.flatMap((p) => p.deliverMessageIds)
           .filter((id) => id);
+        console.log(messageIds);
         const objectIds = messageIds.map((id) => {
           try {
             return new ObjectId(id);
@@ -130,11 +136,18 @@ io.on("connection", (socket) => {
             updateOne: {
               filter: {
                 participants: { $all: [userId, receiverId] },
-                "messages._id": messageId,
               },
-              update: { $set: { "messages.$.status": "read" } },
+              update: { $set: { "messages.$[elem].status": "read" } },
+              arrayFilters: [
+                {
+                  "elem._id": messageId,
+                  "elem.senderId": receiverId,
+                  "elem.status": { $ne: "read" },
+                },
+              ],
             },
           }));
+
           if (receiverSocketId) {
             const result = await MessageModel.bulkWrite(bulkOps);
             console.log("Bulk update result:", result);

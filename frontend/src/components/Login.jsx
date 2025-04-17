@@ -21,17 +21,14 @@ function Login() {
         onSubmit={handleLogin}
         className="bg-white/10 backdrop-blur-md rounded-xl shadow-xl p-8 w-[90%] max-w-sm text-white"
       >
-        {/* User Icon */}
         <div className="flex justify-center mb-6">
           <FaUserCircle className="text-[80px] text-orange-400 drop-shadow-lg" />
         </div>
 
-        {/* Title */}
         <h1 className="text-2xl font-bold text-center text-orange-300 underline mb-6">
           Login
         </h1>
 
-        {/* Mobile Input */}
         <label className="block mb-2 text-sm font-semibold tracking-wide">
           Mobile Number
         </label>
@@ -44,7 +41,6 @@ function Login() {
           placeholder="Enter mobile number"
         />
 
-        {/* Login Button */}
         <div className="flex justify-center mt-6">
           <button
             type="submit"
